@@ -1,0 +1,67 @@
+{
+  "name": "socketwatcher",
+  "version": "0.2.0",
+  "main": "./build/Release/socketwatcher.node",
+  "description": "Binding for uv_poll and replacement for IOWatcher",
+  "keywords": [
+    "IOWatcher",
+    "uv_poll",
+    "uv_poll_t",
+    "file descriptor",
+    "fd"
+  ],
+  "homepage": "https://github.com/btrask/node-socketwatcher/",
+  "bugs": {
+    "url": "https://github.com/btrask/node-socketwatcher/issues",
+    "email": "bentrastk@comcast.net"
+  },
+  "license": "MIT",
+  "contributors": [
+    {
+      "name": "Toby Ealden",
+      "email": "toby.ealden@gmail.com"
+    },
+    {
+      "name": "Ben Trask",
+      "email": "bentrask@comcast.net"
+    }
+  ],
+  "maintainers": [
+    {
+      "name": "btrask",
+      "email": "bentrask@comcast.net"
+    }
+  ],
+  "engines": {
+    "node": ">0.7.9"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/btrask/node-socketwatcher.git"
+  },
+  "gypfile": true,
+  "_npmUser": {
+    "name": "btrask",
+    "email": "bentrask@comcast.net"
+  },
+  "_id": "socketwatcher@0.2.0",
+  "scripts": {
+    "install": "node-gyp rebuild"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "_engineSupported": false,
+  "_npmVersion": "1.1.23",
+  "_nodeVersion": "v0.7.9",
+  "_defaultsLoaded": true,
+  "dist": {
+    "shasum": "3e8dc9846bcf81310f20bc29bebfeb0381543526",
+    "tarball": "http://registry.npmjs.org/socketwatcher/-/socketwatcher-0.2.0.tgz"
+  },
+  "directories": {},
+  "_shasum": "3e8dc9846bcf81310f20bc29bebfeb0381543526",
+  "_from": "socketwatcher@~0.2.0",
+  "_resolved": "https://registry.npmjs.org/socketwatcher/-/socketwatcher-0.2.0.tgz",
+  "readme": "ERROR: No README data found!"
+}

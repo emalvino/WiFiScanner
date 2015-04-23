@@ -1,0 +1,50 @@
+{
+  "name": "pcap",
+  "version": "1.2.0",
+  "description": "raw packet capture, decoding, and analysis",
+  "author": {
+    "name": "Matt Ranney",
+    "email": "mjr@ranney.com"
+  },
+  "maintainers": [
+    {
+      "name": "mjr",
+      "email": "mjr@ranney.com"
+    },
+    {
+      "name": "ujjwalt",
+      "email": "ujjwalthaakar@gmail.com"
+    }
+  ],
+  "main": "./pcap",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mranney/node_pcap.git"
+  },
+  "dependencies": {
+    "socketwatcher": "~0.2.0"
+  },
+  "scripts": {
+    "install": "node-gyp rebuild"
+  },
+  "gypfile": true,
+  "bugs": {
+    "url": "https://github.com/mranney/node_pcap/issues"
+  },
+  "homepage": "https://github.com/mranney/node_pcap",
+  "_id": "pcap@1.2.0",
+  "dist": {
+    "shasum": "b3f279db5b7d39c0977a2b1635857703c1eb9efd",
+    "tarball": "http://registry.npmjs.org/pcap/-/pcap-1.2.0.tgz"
+  },
+  "_from": "pcap@",
+  "_npmVersion": "1.4.4",
+  "_npmUser": {
+    "name": "ujjwalt",
+    "email": "ujjwalthaakar@gmail.com"
+  },
+  "directories": {},
+  "_shasum": "b3f279db5b7d39c0977a2b1635857703c1eb9efd",
+  "_resolved": "https://registry.npmjs.org/pcap/-/pcap-1.2.0.tgz",
+  "readme": "ERROR: No README data found!"
+}
