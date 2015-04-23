@@ -1,0 +1,42 @@
+<div>
+  <h2>From addresses</h2>
+  <table class="table table-stripped">
+    <tr>
+      <th>
+        <a ng-click="sort.by('label')">
+          Label
+          <i class="glyphicon" ng-class="{'glyphicon-chevron-up': !sort.direction, 'glyphicon-chevron-down': sort.direction}" ng-show="sort.field === 'label'"/>
+        </a>
+      </th>
+      <th>
+        <a ng-click="sort.by('mac')">
+          From address
+          <i class="glyphicon" ng-class="{'glyphicon-chevron-up': !sort.direction, 'glyphicon-chevron-down': sort.direction}" ng-show="sort.field === 'mac'"/>
+        </a>
+      </th>
+      <th>
+        <a ng-click="sort.by('vendor')">
+          Vendor
+          <i class="glyphicon" ng-class="{'glyphicon-chevron-up': !sort.direction, 'glyphicon-chevron-down': sort.direction}" ng-show="sort.field === 'vendor'"/>
+        </a>        
+      </th>
+      <th>
+        <a ng-click="sort.by('ssidCount')">
+          Entries
+          <i class="glyphicon" ng-class="{'glyphicon-chevron-up': !sort.direction, 'glyphicon-chevron-down': sort.direction}" ng-show="sort.field === 'ssidCount'"/>
+        </a>        
+      </th>
+    </tr>
+    <tr ng-repeat="address in fromAddresses | orderBy: sort.field:sort.direction | startFrom: pagination.first | limitTo: pagination.pageSize">
+      <td ng-bind="address.label"></td>
+      <td>
+        <a ng-href="#/from/{{address.mac}}" ng-bind="address.mac"></a>
+      </td>
+      <td ng-bind="address.vendor"></td>
+      <td>
+        <a ng-href="#/entries/{{address.mac}}">{{address.ssidCount}} SSIDs</a>
+      </td>
+    </tr>
+  </table>
+  <pagination total-items="pagination.total" items-per-page="pagination.pageSize" ng-model="pagination.currentPage" ng-change="pagination.changed()"></pagination>
+</div>

@@ -1,0 +1,44 @@
+<h2>Settings</h2>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">Server connection</h3>
+	</div>
+	<div class="panel-body row">
+		<label for="serverUrl" class="col-md-3 control-label">URL:</label>
+		<div class="col-md-9">
+			<input id="serverUrl" type="text" ng-model="settings.serverUrl" class="form-control"/>
+		</div>
+		<div class="col-md-3">
+			<button type="button" ng-click="test()" class="btn btn-default">Test connection</button>
+		</div>
+		<i class="col-md-9 glyphicon glyphicon-refresh" ng-show="testResult === 'waiting'"/>
+		<div class="col-md-9 alert alert-success" ng-show="testResult === 'ok'">
+			<i class="glyphicon glyphicon-ok"/> Connection successful
+		</div>
+		<div class="col-md-9 alert alert-danger" ng-show="testResult === 'error'">
+			<i class="glyphicon glyphicon-remove"/> {{error}}
+		</div>
+	</div>
+</div>
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">Scanning</h3>
+	</div>
+	<div class="panel-body row">
+		<label for="ssidScan" class="col-md-3 control-label">SSIDs scan:</label>
+		<div class="col-md-offset-6 col-md-3">
+			<button type="button" id="ssidScan" ng-click="startScanning('ssid')" class="btn btn-default" ng-hide="scanStatus === 'ssid'">Start</button>
+			<button type="button" ng-click="stopScanning()" class="btn btn-default" ng-show="scanStatus === 'ssid'">Stop</button>
+		</div>
+		<label for="signalScan" class="col-md-3 control-label">Signal scan:</label>
+		<div class="col-md-6">
+			<input type="text" class="form-control" ng-model="target" placeholder="MAC address"/>
+		</div>
+		<div class="col-md-3">
+			<button type="button" ng-click="startScanning('signal')" class="btn btn-default" ng-disabled="!target" ng-hide="scanStatus === 'signal'">Start</button>
+			<button type="button" ng-click="stopScanning()" class="btn btn-default" ng-show="scanStatus === 'signal'">Stop</button>
+		</div>
+	</div>
+</div>
+<a href="#/" class="btn btn-default">Cancel</a>
+<button type="button" ng-click="save()" class="btn btn-primary">Save</button>

@@ -1,0 +1,44 @@
+<div>
+  <h2>Sessions</h2>
+  <table class="table table-stripped">
+    <tr>
+      <th>
+        <a ng-click="sort.by('label')">
+          Label
+          <i class="glyphicon" ng-class="{'glyphicon-chevron-up': !sort.direction, 'glyphicon-chevron-down': sort.direction}" ng-show="sort.field === 'label'"/>
+        </a>
+      </th>
+      <th>
+        <a ng-click="sort.by('number')">
+          Number
+          <i class="glyphicon" ng-class="{'glyphicon-chevron-up': !sort.direction, 'glyphicon-chevron-down': sort.direction}" ng-show="sort.field === 'number'"/>
+        </a>
+      </th>
+      <th>
+        <a ng-click="sort.by('from')">
+          From date
+          <i class="glyphicon" ng-class="{'glyphicon-chevron-up': !sort.direction, 'glyphicon-chevron-down': sort.direction}" ng-show="sort.field === 'from'"/>
+        </a>        
+      </th>
+      <th>
+        <a ng-click="sort.by('to')">
+          To date
+          <i class="glyphicon" ng-class="{'glyphicon-chevron-up': !sort.direction, 'glyphicon-chevron-down': sort.direction}" ng-show="sort.field === 'to'"/>
+        </a>        
+      </th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+    </tr>
+    <tr ng-repeat="session in sessions | orderBy: sort.field:sort.direction | startFrom: pagination.first | limitTo: pagination.pageSize">
+      <td ng-bind="session.label"></td>
+      <td>
+        <a ng-href="#/session/{{session.number}}" ng-bind="session.number"></a>
+      </td>
+      <td ng-bind="session.from | date: 'dd/MM/yyyy HH:mm:ss'"></td>
+      <td ng-bind="session.to | date: 'dd/MM/yyyy HH:mm:ss'"></td>
+      <td ng-bind="session.latitude"></td>
+      <td ng-bind="session.longitude"></td>
+    </tr>
+  </table>
+  <pagination total-items="pagination.total" items-per-page="pagination.pageSize" ng-model="pagination.currentPage" ng-change="pagination.changed()"></pagination>
+</div>

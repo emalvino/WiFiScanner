@@ -1,0 +1,11 @@
+<div>
+  <h2>From addresses for {{ssid}}</h2>
+  <table class="table table-stripped">
+    <tr>
+      <th>From address</th>
+    </tr>
+    <tr ng-repeat="address in fromAddresses">
+      <td><a ng-href="#/entries/{{address}}" ng-bind="address"></a></td>
+    </tr>
+  </table>
+</div>

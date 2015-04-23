@@ -1,0 +1,16 @@
+<div>
+  <h2>SSIDs</h2>
+  <table class="table table-stripped">
+    <tr>
+      <th>SSID</th>
+      <th>Locations</th>
+      <th>Clients</th>
+    </tr>
+    <tr ng-repeat="ssid in ssids | orderBy | startFrom: pagination.first | limitTo: pagination.pageSize">
+      <td ng-bind="ssid"></td>
+      <td><a ng-href="http://wigle.net/gps/gps/GPSDB/confirmquery/?latrange1=-34.6199&latrange2=-34.5371&longrange1=-58.528&longrange2=-58.3698&ssid={{ssid}}">Find locations</a></td>
+      <td><a ng-href="#/ssid/{{ssid}}">Show clients</a></td>
+    </tr>
+  </table>
+  <pagination total-items="pagination.total" items-per-page="pagination.pageSize" ng-model="pagination.currentPage" ng-change="pagination.changed()"></pagination>
+</div>

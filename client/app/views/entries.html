@@ -1,0 +1,23 @@
+<div>
+  <h2>Entries for <a ng-href="#/from/{{from}}" ng-bind="from"></a></h2>
+  <div class="row" ng-repeat="(ssid, data) in ssids">
+    <i class="col-md-1 glyphicon" ng-class="{'glyphicon-plus': data.collapsed, 'glyphicon-minus': !data.collapsed}" ng-click="data.collapsed = !data.collapsed"/>
+    <span class="col-md-9" ng-bind="ssid"></span>
+    <a class="col-md-2" ng-href="http://wigle.net/gps/gps/GPSDB/confirmquery/?latrange1=-34.6199&latrange2=-34.5371&longrange1=-58.528&longrange2=-58.3698&ssid={{ssid}}">Find locations</a>  
+    <table class="col-md-12 table table-stripped" collapse="data.collapsed">
+      <tr>
+        <th>To</th>
+        <th>Strength</th>
+        <th>Timestamp</th>
+      </tr>
+      <tr ng-repeat="entry in data.entries | orderBy: 'timestamp'">
+        <td>
+          <span ng-show="isBroadcast(entry.to)">Broadcast</span>
+          <a ng-hide="isBroadcast(entry.to)" ng-href="http://wigle.net/gps/gps/GPSDB/confirmquery/?latrange1=-34.6199&latrange2=-34.5371&longrange1=-58.528&longrange2=-58.3698&netid={{entry.to}}" ng-bind="entry.to"></a>
+        </td>
+        <td ng-bind="entry.strength"></td>
+        <td ng-bind="entry.timestamp | date: 'dd/MM/yyyy HH:mm:ss'"></td>
+      </tr>
+    </table>
+  </div>
+</div>
