@@ -30,14 +30,6 @@
 			<button type="button" id="ssidScan" ng-click="startScanning('ssid')" class="btn btn-default" ng-hide="scanStatus === 'ssid'">Start</button>
 			<button type="button" ng-click="stopScanning()" class="btn btn-default" ng-show="scanStatus === 'ssid'">Stop</button>
 		</div>
-		<label for="signalScan" class="col-md-3 control-label">Signal scan:</label>
-		<div class="col-md-6">
-			<input type="text" class="form-control" ng-model="target" placeholder="MAC address"/>
-		</div>
-		<div class="col-md-3">
-			<button type="button" ng-click="startScanning('signal')" class="btn btn-default" ng-disabled="!target" ng-hide="scanStatus === 'signal'">Start</button>
-			<button type="button" ng-click="stopScanning()" class="btn btn-default" ng-show="scanStatus === 'signal'">Stop</button>
-		</div>
 	</div>
 </div>
 <a href="#/" class="btn btn-default">Cancel</a>

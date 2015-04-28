@@ -14,11 +14,7 @@ angular.module('clientApp').controller('SettingsCtrl', function ($scope, $rootSc
     	});
     };
     $scope.startScanning = function(type){
-        var target;
-        if(type === 'signal'){
-            target = $scope.target;
-        }
-    	scanService.startScan(type, target).then(function(results){
+    	scanService.startScan(type).then(function(results){
     		$rootScope.scanStatus = results.data.status;
     	});
     };

@@ -159,16 +159,7 @@ function createNewSession(){
 }
 var pcapSession;
 var status = {
-	status: '',
-	signal: {
-		previous: 0,
-		alpha: 0.1,
-		strength: 0,
-		add: function(strength){
-			this.previous = this.strength;
-			this.strength = this.alpha * strength + (1 - this.alpha) * this.previous;
-		}
-	}
+	status: ''
 };
 function startScanningSSIDs(){
 	status.status = 'ssid';
@@ -196,17 +187,6 @@ function startScanningSSIDs(){
 		});
 	});
 }
-function startScanningForSignal(target){
-	status.ta = target;
-	pcapSession = pcap.createSession(ifName, 'wlan type mgt and wlan addr3 ' + target);
-	status.status = 'signal'
-	pcapSession.on('packet', function(rawPacket){
-		var packet = pcap.decode.packet(rawPacket);
-		var strength = packet.link.ieee802_11Frame.strength;
-		status.signal.add(strength);
-		console.log(strength + ',' + status.signal.strength);
-	});
-}
 function stopScanning(){
 	if(pcapSession){
 		pcapSession.close();
@@ -226,11 +206,6 @@ app.get('/scan/:type', function(request, response){
 	if(type === 'ssid'){
 		stopScanning();
 		startScanningSSIDs();
-	}
-	else if(type === 'signal'){
-		var target = request.param('target');
-		stopScanning();
-		startScanningForSignal(target);
 	}
 	else if(type === 'stop'){
 		stopScanning();

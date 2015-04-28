@@ -6,11 +6,8 @@ angular.module('clientApp').service('scanService', function($http, $localStorage
 			var url = testUrl || $localStorage.serverUrl; 
 			return $http.get(url + '/scan');
 		},
-		startScan: function(type, target){
+		startScan: function(type){
 			var url = $localStorage.serverUrl + '/scan/' + type;
-			if(target){
-				url += '?target=' + target; 
-			}
 			return $http.get(url);
 		},
 		stopScan: function(){
