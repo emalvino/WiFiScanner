@@ -6,18 +6,18 @@ Only tracks probe request for a specific SSID, ignoring the others.
 ## Requirements
 
 * Linux or *BSD
-* Node.js
-* MongoDB
-* Bower (for the client)
-* Grunt (for the client)
+* [Node.js](https://nodejs.org/)
+* [MongoDB](https://www.mongodb.org/)
+* [Bower](http://bower.io/) (for the client)
+* [Grunt](http://gruntjs.com/) (for the client)
 
 This is intended for running on a Linux installation with a WiFi adapter capable of running in [Monitor mode](https://wiki.wireshark.org/CaptureSetup/WLAN#Turning_on_monitor_mode)
 
 ## Components
 
 It's composed of 2 parts:
-* A Node.js backend doing the scanning, storing the data (on MongoDB), and providing REST services to access the data.
-* An AngularJS client to present the data in a user friendly manner.
+* A [Node.js](https://nodejs.org/) backend doing the scanning, storing the data (on [MongoDB](https://www.mongodb.org/)), and providing REST services to access the data.
+* An [AngularJS](https://angularjs.org/) client to present the data in a user friendly manner.
 
 ## Model
 
