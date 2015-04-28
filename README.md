@@ -23,9 +23,30 @@ It's composed of 2 parts:
 
 The model uses the following objects:
 
-* MAC address
-* SSID
-* Session
+* MAC address. Example:
+```
+{
+	mac: '00-00-00-00-00-00',
+	vendor: 'Samsung',
+	label: 'User defined label',
+	ssidCount: 12
+}
+```
+* SSID. Example:
+```
+'WiFi SSID'
+```
+* Session. Represents a capturing session. Example:
+```
+{
+	number: 1,
+	label: 'First session capturing from Home',
+	from: '2015-04-11T14:00:00',
+	to: '2015-04-11T15:00:00',
+	latitude: '-34.00981',
+	longitude: '30.88714'
+}
+```
 
 ## Server
 
@@ -43,22 +64,29 @@ ifconfig wlan0 start```
 #### Scan start/stop
 
 Start scanning for SSIDs: `GET http://localhost:3000/scan/ssid`
+
 Stop scanning: `GET http://localhost:3000/scan/stop`
+
 Get scanning status: `GET http://localhost:3000/scan`
 
 #### SSIDs
 
 Get all captured SSIDs: `GET http://localhost:3000/ssid`
+
 Find MAC addresses probing for an SSID: `GET http://localhost:3000/ssid/[ssid_name]`
 
 #### MAC addresses
 
 Get all captured MAC addresses: `GET http://localhost:3000/from`
+
 Get MAC address details (including vendor resolution): `GET http://localhost:3000/details/[from_mac_address]`
+
 Update MAC address details: `POST http://localhost:3000/details/[from_mac_address]`
 
 #### Sessions
 
 Get all sessions: `GET http://localhost:3000/session`
+
 Get a specific session: `GET http://localhost:3000/session/[session_number]`
+
 Save a session: `POST http://localhost:3000/session/[session_number]`
