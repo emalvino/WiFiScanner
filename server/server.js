@@ -77,7 +77,7 @@ db.once('open', function(){
 // Vendor http lookup
 function lookupVendor(mac){
 	var deferred = q.defer();
-	if(status === ''){
+	if(status.status === ''){
 		http.get('http://www.macvendorlookup.com/api/v2/' + mac, function(response){
 			var result;
 			response.on('data', function(data){
@@ -141,7 +141,7 @@ function parseSSID(rawPacket, result){
 function createNewSession(){
 	var deferred = q.defer();
 	var date = new Date();
-	Session.findOne().sort('number').exec(function(error, result){
+	Session.findOne().sort('-number').exec(function(error, result){
 		if(!checkAndHandleError(error, deferred)){
 			var session = new Session({
 				number: result.number + 1,
@@ -202,7 +202,7 @@ function sendStatus(response){
 // GET Endpoints
 // Start/stop scanning
 app.get('/scan/:type', function(request, response){
-	var type = request.param('type');
+	var type = request.params.type;
 	if(type === 'ssid'){
 		stopScanning();
 		startScanningSSIDs();
@@ -222,7 +222,7 @@ app.get('/scan', function(request, response){
 });
 // Find all sessions
 app.get('/session/:number?', function(request, response){
-	var number = request.param('number');
+	var number = request.params.number;
 	var session = Session.find();
 	if(number){
 		session = Session.findOne().where({number: number});
@@ -235,12 +235,12 @@ app.get('/session/:number?', function(request, response){
 });
 // Save session
 app.post('/session/:number', function(request, response){
-	var number = request.param('number');
+	var number = request.params.number;
 	Session.findOne().where({number: number}).exec(function(error, session){
 		if(!checkAndHandleError(error, response)){
-			session.label = request.param('label');
-			session.latitude = request.param('latitude');
-			session.longitude = request.param('longitude');
+			session.label = request.body.label;
+			session.latitude = request.body.latitude;
+			session.longitude = request.body.longitude;
 			session.save(function(error, savedSession){
 				if(!checkAndHandleError(error, response)){
 					response.json(savedSession);
@@ -251,7 +251,7 @@ app.post('/session/:number', function(request, response){
 });
 // Find all entries
 app.get('/entry/:mac?', function(request, response){
-	var mac = request.param('mac');
+	var mac = request.params.mac;
 	var entry = Entry;
 	if(mac){
 		entry = Entry.where({from: mac});
@@ -288,7 +288,7 @@ app.get('/ssid', function(request, response){
 });
 // Find entries for ssid
 app.get('/ssid/:ssid', function(request, response){
-	var ssid = request.param('ssid');
+	var ssid = request.params.ssid;
 	Entry.where({ssid: ssid}).find().distinct('from', function(error, results){
 		if(!checkAndHandleError(error, response)){
 			response.json(results);
@@ -297,7 +297,7 @@ app.get('/ssid/:ssid', function(request, response){
 });
 // Find and update vendor
 app.get('/details/:mac', function(request, response){
-	var mac = request.param('mac');
+	var mac = request.params.mac;
 	From.where({ mac: mac }).findOne(function(error, result){
 		if(!checkAndHandleError(error, response)){
 			if(!result.vendor){
@@ -308,6 +308,8 @@ app.get('/details/:mac', function(request, response){
 							response.json(savedResult);
 						}
 					});
+				}, function(errorResponse){
+					checkAndHandleError(errorResponse, response);
 				});
 			}
 			else{
@@ -320,8 +322,8 @@ app.get('/details/:mac', function(request, response){
 });
 // Update mac details (label)
 app.post('/details/:mac', function(request, response){
-	var mac = request.param('mac');
-	var label = request.param('label');
+	var mac = request.params.mac;
+	var label = request.params.label;
 	From.where({ mac: mac }).findOne(function(error, result){
 		if(!checkAndHandleError(error, response)){
 			result.label = label;
