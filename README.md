@@ -23,7 +23,9 @@ It's composed of 2 parts:
 
 The model uses the following objects:
 
-* MAC address. Example:
+### MAC address
+
+Represents the MAC address of the probe request origin. Example:
 ```
 {
 	mac: '00-00-00-00-00-00',
@@ -32,11 +34,16 @@ The model uses the following objects:
 	ssidCount: 12
 }
 ```
-* SSID. Example:
+### SSID
+
+Represents an SSID probed by a MAC address. Example:
 ```
 'WiFi SSID'
 ```
-* Session. Represents a capturing session. Example:
+
+### Session
+
+Represents a capturing session. Example:
 ```
 {
 	number: 1,
@@ -54,39 +61,58 @@ The model uses the following objects:
 
 1. Start MongoDB (/etc/init.d/mongodb start on most distributions)
 2. Switch the adapter to Monitor mode. In this example using wlan0: 
-```ifconfig wlan0 stop
+```
+ifconfig wlan0 stop
 iwconfig wlan0 mode Monitor
-ifconfig wlan0 start```
+ifconfig wlan0 start
+```
 3. On the server directory: `node server.js [your_adapter]`. For example: `node server.js wlan0`
 
 ### Services
 
 #### Scan start/stop
 
-Start scanning for SSIDs: `GET http://localhost:3000/scan/ssid`
-
-Stop scanning: `GET http://localhost:3000/scan/stop`
-
-Get scanning status: `GET http://localhost:3000/scan`
+* Start scanning for SSIDs: `GET http://localhost:3000/scan/ssid`
+* Stop scanning: `GET http://localhost:3000/scan/stop`
+* Get scanning status: `GET http://localhost:3000/scan`
 
 #### SSIDs
 
-Get all captured SSIDs: `GET http://localhost:3000/ssid`
-
-Find MAC addresses probing for an SSID: `GET http://localhost:3000/ssid/[ssid_name]`
+* Get all captured SSIDs: `GET http://localhost:3000/ssid`
+* Find MAC addresses probing for an SSID: `GET http://localhost:3000/ssid/[ssid_name]`
 
 #### MAC addresses
 
-Get all captured MAC addresses: `GET http://localhost:3000/from`
+* Get all captured MAC addresses: `GET http://localhost:3000/from`
+* Get MAC address details (including vendor resolution): `GET http://localhost:3000/details/[from_mac_address]`
+* Update MAC address details: `POST http://localhost:3000/details/[from_mac_address]`
 
-Get MAC address details (including vendor resolution): `GET http://localhost:3000/details/[from_mac_address]`
+Example:
 
-Update MAC address details: `POST http://localhost:3000/details/[from_mac_address]`
+`POST http://localhost:3000/details/00-00-00-00-00-01`
+
+```
+{
+	label: 'Wifes cellphone'
+}
+```
 
 #### Sessions
 
-Get all sessions: `GET http://localhost:3000/session`
+* Get all sessions: `GET http://localhost:3000/session`
+* Get a specific session: `GET http://localhost:3000/session/[session_number]`
+* Save a session: `POST http://localhost:3000/session/[session_number]`
 
-Get a specific session: `GET http://localhost:3000/session/[session_number]`
+Example:
 
-Save a session: `POST http://localhost:3000/session/[session_number]`
+`POST http://localhost:3000/session/1`
+
+```
+{
+	label: 'First session capturing from Home',
+	from: '2015-04-11T14:00:00',
+	to: '2015-04-11T15:00:00',
+	latitude: '-34.00981',
+	longitude: '30.88714'
+}
+```
