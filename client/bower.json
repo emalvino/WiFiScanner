@@ -1,6 +1,13 @@
 {
-  "name": "client",
-  "version": "0.0.0",
+  "name": "WiFiScanner Client",
+  "version": "1.0.0",
+  "description": "Sample probe request tracking application web client",
+  "author": "emalvino",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/emalvino/WiFiScanner"
+  },  
   "dependencies": {
     "angular": "^1.3.0",
     "json3": "^3.3.0",
